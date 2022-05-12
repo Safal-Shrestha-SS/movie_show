@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../data/model/movie_model.dart';
 // import 'package:sqflite/sqlite_api.dart';
 
 class MovieDatabase {
@@ -36,5 +38,26 @@ class MovieDatabase {
 
     )
 ''');
+    print('database created');
+  }
+
+  Future<void> addMovies(List<Movie> movieLists) async {
+    Database db = await instance.database;
+    for (var element in movieLists) {
+      await db.execute('''
+INSERT INTO movies (id,title,posterPath,overview,releaseDate,voterAverage,genreIds)
+VALUES( ${element.id}, ${element.title}, ${element.posterPath}, ${element.overview}, ${element.releaseDate}, ${element.voteAverage}, ${element.genreIds});
+
+''');
+    }
+  }
+
+  Future<List<Movie>> getMovies() async {
+    Database db = await instance.database;
+    var movie = await db.query('movies');
+
+    List<Movie> movieList =
+        movie.isNotEmpty ? movie.map((e) => Movie.fromJson(e)).toList() : [];
+    return movieList;
   }
 }

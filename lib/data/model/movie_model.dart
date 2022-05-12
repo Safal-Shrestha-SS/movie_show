@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 class Movie {
   final int id;
   final String title;
@@ -25,4 +28,16 @@ class Movie {
         releaseDate: DateTime.parse(json["release_date"]),
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
       );
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'posterPath': posterPath,
+      'releaseDate': releaseDate.millisecondsSinceEpoch,
+      'overview': overview,
+      'voteAverage': voteAverage,
+      'genreIds': genreIds,
+    };
+  }
 }

@@ -16,23 +16,46 @@ class _MovieBrowseState extends State<MovieBrowse> {
       appBar: AppBar(
         title: const Text('Trending Movies'),
       ),
-      body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          alignment: Alignment.center,
-          child: BlocConsumer(
-              builder: ((context, state) {
-                if (state is MovieInitial) {
-                  return const Center();
-                } else {
-                  return const Center();
-                }
-              }),
-              listener: (context, state) {})),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      body: BlocBuilder<MovieCubit, MovieState>(
+        builder: ((context, state) {
+          if (state is MovieInitial) {
+            return const Center(
+              child: CityInputField(),
+            );
+          } else {
+            return const Center(
+              child: CityInputField(),
+            );
+          }
+        }),
       ),
     );
+  }
+}
+
+class CityInputField extends StatelessWidget {
+  const CityInputField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.red, // background
+          onPrimary: Colors.white, // foreground
+        ),
+        onPressed: () {
+          getData(context);
+        },
+        child: const Text('Get'),
+      ),
+    );
+  }
+
+  void getData(BuildContext context) {
+    final movieCubit = context.read<MovieCubit>();
+    print('clicked');
+    movieCubit.getMovies();
   }
 }
