@@ -18,6 +18,16 @@ class MovieLoading extends MovieState {
 class MovieLoaded extends MovieState {
   final List<Movie> movieList;
   const MovieLoaded(this.movieList);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is MovieLoaded && listEquals(other.movieList, movieList);
+  }
+
+  @override
+  int get hashCode => movieList.hashCode;
 }
 
 class MovieError extends MovieState {

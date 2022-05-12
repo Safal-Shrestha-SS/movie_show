@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_show/cubit/movie_cubit.dart';
+import 'package:movie_show/database/movie_database.dart';
 
 class MovieBrowse extends StatefulWidget {
   const MovieBrowse({Key? key}) : super(key: key);
@@ -16,16 +17,21 @@ class _MovieBrowseState extends State<MovieBrowse> {
       appBar: AppBar(
         title: const Text('Trending Movies'),
       ),
-      body: BlocBuilder<MovieCubit, MovieState>(
+      body: BlocConsumer<MovieCubit, MovieState>(
+        listener: ((context, state) {}),
         builder: ((context, state) {
           if (state is MovieInitial) {
             return const Center(
               child: CityInputField(),
             );
-          } else {
+          } else if (state is MovieLoading) {
             return const Center(
-              child: CityInputField(),
+              child: CircularProgressIndicator(),
             );
+          } else if (state is MovieLoaded) {
+            return const CityInputField();
+          } else {
+            return const CityInputField();
           }
         }),
       ),
