@@ -3,6 +3,7 @@ import 'package:movie_show/cubit/movie_cubit.dart';
 import 'package:movie_show/pages/movie_browse.dart';
 import 'package:movie_show/repository/movie_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_show/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: RouteGenerator.generateRoute,
       title: 'Flutter Demo',
+      initialRoute: '/',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
