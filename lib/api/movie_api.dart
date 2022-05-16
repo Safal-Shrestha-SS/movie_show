@@ -16,7 +16,6 @@ class MovieApi {
       // print(movieModel[0]);
       movieModel.forEach((item) {
         final movie = Movie.fromJson(item);
-        print(movie.releaseDate);
         moviesList.add(movie);
       });
       return moviesList;

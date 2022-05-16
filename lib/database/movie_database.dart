@@ -39,7 +39,7 @@ class MovieDatabase {
 
     )
 ''');
-    print('database created');
+    // print('database created');
   }
 
   Future<void> addMovies(List<Movie> movieLists) async {
@@ -47,8 +47,6 @@ class MovieDatabase {
     await db.rawDelete('''DELETE FROM movies''');
     for (var element in movieLists) {
       // print(element.title);
-
-      print(element.title);
       await db.insert('movies', {
         'id': '${element.id}',
         'title': element.title,

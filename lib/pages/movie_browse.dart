@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_show/cubit/movie_cubit.dart';
-import 'package:movie_show/database/movie_database.dart';
 
 class MovieBrowse extends StatefulWidget {
   const MovieBrowse({Key? key}) : super(key: key);
@@ -61,7 +60,7 @@ class CityInputField extends StatelessWidget {
 
   void getData(BuildContext context) {
     final movieCubit = context.read<MovieCubit>();
-    print('clicked');
+    // print('clicked');
     movieCubit.getMovies();
   }
 }

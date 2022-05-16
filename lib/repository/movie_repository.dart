@@ -5,7 +5,7 @@ import '../database/movie_database.dart';
 
 abstract class MovieRepository {
   Future<List<Movie>> fetchMovies();
-  Future<void> show();
+  Future<List<Movie>> show();
 }
 
 class RealMovieRepostoty extends MovieRepository {
@@ -20,10 +20,8 @@ class RealMovieRepostoty extends MovieRepository {
   }
 
   @override
-  Future<void> show() async {
+  Future<List<Movie>> show() async {
     var movie = await movieDatabase.getMovies();
-    movie.forEach((element) {
-      print('${element.releaseDate}   ${element.title}');
-    });
+    return movie;
   }
 }
